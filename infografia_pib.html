@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: PIB de México</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #eef4f5;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flow-arrow {
+            color: #005f73;
+            font-weight: bold;
+        }
+        .flow-box {
+            border: 2px solid #0a9396;
+        }
+    </style>
+</head>
+<body class="text-[#001219]">
+
+    <header class="bg-[#005f73] text-white py-8 shadow-lg">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight">El Pulso de la Economía</h1>
+            <p class="mt-2 text-xl md:text-2xl font-light text-[#94d2bd]">PIB: Medida y Efectos en Políticas y Negocios</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-12">
+
+        <section id="intro" class="mb-16">
+            <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#005f73] mb-4">¿Qué es el PIB y por qué debe importarte?</h2>
+                <p class="text-lg mb-6 text-gray-700">El Producto Interno Bruto (PIB) es el indicador más importante para medir la salud y el tamaño de una economía. Es el marcador final que nos dice cuánto valor ha generado un país. Para un estratega de negocios, entender el PIB es la brújula que guía las decisiones de inversión, expansión y gestión de riesgos.</p>
+
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                     <h3 class="text-2xl font-semibold text-center text-[#0a9396] mb-6">El Flujo Circular de la Economía</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="flex flex-col space-y-4">
+                            <div class="flow-box bg-white p-4 rounded-lg shadow-sm text-center">
+                                <p class="font-bold text-xl">HOGARES</p>
+                                <p class="text-gray-600">Consumen y proveen mano de obra</p>
+                            </div>
+                            <div class="self-center text-2xl flow-arrow">↓<span class="mx-4">↑</span></div>
+                            <div class="flow-box bg-white p-4 rounded-lg shadow-sm text-center">
+                                <p class="font-bold text-xl">EMPRESAS</p>
+                                <p class="text-gray-600">Invierten, producen y pagan salarios</p>
+                            </div>
+                        </div>
+                         <div class="flex flex-col space-y-4 md:space-y-0">
+                            <p class="text-center text-gray-600 mb-4">Estos actores interactúan constantemente, generando un flujo de dinero, bienes y servicios que el PIB se encarga de medir.</p>
+                            <div class="grid grid-cols-2 gap-4">
+                               <div class="flow-box bg-white p-4 rounded-lg shadow-sm text-center">
+                                    <p class="font-bold text-xl">GOBIERNO</p>
+                                    <p class="text-gray-600">Gasta e implementa políticas</p>
+                                </div>
+                                <div class="flow-box bg-white p-4 rounded-lg shadow-sm text-center">
+                                    <p class="font-bold text-xl">SECTOR EXTERNO</p>
+                                    <p class="text-gray-600">Exporta e importa</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="desarrollo" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#005f73] mb-8">Anatomía del PIB y su Impacto Estratégico</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+                    <h3 class="text-2xl font-semibold text-[#0a9396] mb-4">La Fórmula del Crecimiento: PIB = C+I+G+(X-M)</h3>
+                    <p class="text-gray-700 mb-6">El PIB suma cuatro componentes del gasto. El consumo de los hogares (C) es el motor principal, representando la mayor parte de la economía.</p>
+                    <div class="chart-container h-64 md:h-80"><canvas id="gdpComponentsChart"></canvas></div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col justify-center">
+                     <h3 class="text-2xl font-semibold text-[#0a9396] mb-4">¿Crecimos de Verdad? Real vs. Nominal</h3>
+                     <div class="space-y-4">
+                         <div class="bg-[#94d2bd] bg-opacity-20 p-4 rounded-lg">
+                             <h4 class="font-bold text-lg text-[#005f73]">PIB Nominal</h4>
+                             <p class="text-gray-700">Mide la producción a precios actuales. Puede ser engañoso por el efecto de la inflación.</p>
+                         </div>
+                         <div class="bg-[#e9d8a6] bg-opacity-30 p-4 rounded-lg">
+                             <h4 class="font-bold text-lg text-[#997404]">PIB Real</h4>
+                             <p class="text-gray-700">Mide la producción a precios constantes. <span class="font-bold">Es el indicador fiel del crecimiento real.</span></p>
+                         </div>
+                     </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 lg:col-span-2">
+                    <h3 class="text-2xl font-semibold text-center text-[#0a9396] mb-6">El PIB como Herramienta Estratégica</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xl font-bold text-center mb-4">Para los Negocios</h4>
+                            <ul class="space-y-3 list-disc list-inside text-gray-700">
+                                <li><span class="font-semibold">Planificación Estratégica:</span> Un PIB en alza sugiere mayor demanda.</li>
+                                <li><span class="font-semibold">Identificar Oportunidades:</span> ¿Qué sectores impulsan el crecimiento?</li>
+                                <li><span class="font-semibold">Gestión de Riesgos:</span> Una desaceleración es una señal de alerta para ser cautelosos.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-center mb-4">Para el Gobierno</h4>
+                             <ul class="space-y-3 list-disc list-inside text-gray-700">
+                                <li><span class="font-semibold">Diseño de Políticas:</span> Incentivar el consumo o la inversión si el PIB se debilita.</li>
+                                <li><span class="font-semibold">Comparación Internacional:</span> Medir el desempeño del país frente a sus competidores.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mexico" class="mb-16">
+            <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-[#005f73] mb-2">Radiografía de México: 2T 2025</h2>
+                <p class="text-center text-lg text-gray-600 mb-8">Una mirada a los datos clave que definen el panorama económico actual.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <div class="bg-gray-50 border border-[#94d2bd] rounded-lg p-4 text-center">
+                        <p class="text-4xl font-bold text-[#005f73]">+1.2%</p>
+                        <p class="font-semibold text-gray-700">Crecimiento Anual</p>
+                    </div>
+                    <div class="bg-gray-50 border border-[#94d2bd] rounded-lg p-4 text-center">
+                        <p class="text-4xl font-bold text-[#005f73]">#12</p>
+                        <p class="font-semibold text-gray-700">Ranking Mundial (2024)</p>
+                    </div>
+                     <div class="bg-gray-50 border border-[#e9d8a6] rounded-lg p-4 text-center">
+                        <p class="text-4xl font-bold text-orange-600">NARANJA</p>
+                        <p class="font-semibold text-gray-700">Semáforo Económico</p>
+                    </div>
+                    <div class="bg-gray-50 border border-[#e9d8a6] rounded-lg p-4 text-center">
+                        <p class="text-4xl font-bold text-orange-600">Estancado</p>
+                        <p class="font-semibold text-gray-700">PIB per cápita (vs. 2017)</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                     <div>
+                        <h3 class="text-2xl font-semibold text-[#0a9396] mb-4">Desempeño por Sectores</h3>
+                        <p class="text-gray-700 mb-6">El crecimiento es desigual. Mientras los servicios profesionales impulsan la economía, sectores clave como la minería y el comercio al por mayor actúan como un freno.</p>
+                        <div class="chart-container"><canvas id="sectorPerformanceChart"></canvas></div>
+                    </div>
+                     <div>
+                        <h3 class="text-2xl font-semibold text-[#0a9396] mb-4">Proyección de Crecimiento</h3>
+                        <p class="text-gray-700 mb-6">Las previsiones futuras del <strong>International Monetary Fund (FMI)</strong> muestran un crecimiento modesto. Para alcanzar la meta de estar en el Top 10 de economías, México necesita acelerar su ritmo y fomentar la inversión.</p>
+                        <div class="chart-container"><canvas id="gdpProjectionChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion">
+            <div class="bg-[#005f73] text-white rounded-2xl shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-6">Del Dato a la Decisión Profesional</h2>
+                <p class="text-center text-lg text-[#94d2bd] mb-8 max-w-4xl mx-auto">Entender el PIB te permite anticipar el futuro y convertir los desafíos económicos en oportunidades de negocio. Así es como los conceptos se aplican en la vida real:</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-[#001219] bg-opacity-20 p-6 rounded-lg">
+                        <h4 class="font-bold text-xl mb-2 text-[#e9d8a6]">Gerente de Inversiones</h4>
+                        <p>"El crecimiento lento me lleva a diversificar el portafolio hacia sectores con mayor potencial y a considerar el riesgo país asociado a la incertidumbre política."</p>
+                    </div>
+                     <div class="bg-[#001219] bg-opacity-20 p-6 rounded-lg">
+                        <h4 class="font-bold text-xl mb-2 text-[#e9d8a6]">Director de Suministros</h4>
+                        <p>"Con la contracción del comercio, optimizaré inventarios y renegociaré con proveedores para mejorar la eficiencia y evitar sobrecostos."</p>
+                    </div>
+                     <div class="bg-[#001219] bg-opacity-20 p-6 rounded-lg">
+                        <h4 class="font-bold text-xl mb-2 text-[#e9d8a6]">Emprendedor</h4>
+                        <p>"Con el PIB per cápita estancado, en lugar de expandir, invertiré en mejorar la experiencia del cliente actual para ganar cuota de mercado."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bibliografia" class="mt-16">
+            <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-[#005f73] mb-6">Bibliografía</h2>
+                <div class="text-gray-600 text-sm space-y-3 leading-relaxed">
+                    <p>México Cómo Vamos. (2025, agosto). Economía mexicana crece 1.2 % anual en el 2T2025. Recuperado de https://mexicocomovamos.mx/publicaciones/2025/08/economia-mexicana-crece-1-2-anual-en-el-2t2025/</p>
+                    <p>Mexico News Daily. (2025, 22 de septiembre). IMF revises Mexico’s economic forecast upward. Recuperado de https://mexiconewsdaily.com/business/imf-mexicos-economic-forecast-upward/</p>
+                    <p>Parkin, M. (2018). Medición del PIB y del crecimiento económico (pp. 491–497). En Economía (12.ª ed.). Pearson.</p>
+                    <p>Statista. (s. f.). Growth rate of Mexico’s gross domestic product (GDP). Recuperado de https://www.statista.com/statistics/263608/gross-domestic-product-gdp-growth-rate-in-mexico/</p>
+                    <p>TheGlobalEconomy. (s. f.). Mexico: Economic growth forecast. Recuperado de https://www.theglobaleconomy.com/Mexico/gdp_growth_outlook_imf/</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center py-6 text-gray-500 text-sm">
+        <p class="font-semibold mb-4 text-base text-gray-600">Félix Arturo Hinojosa Reyna</p>
+        <p>Infografía generada con base en datos del FMI, Banco Mundial y análisis de "México, ¿cómo vamos?".</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const palette = {
+                primary: '#005f73',
+                accent: '#0a9396',
+                light: '#94d2bd',
+                highlight: '#e9d8a6',
+                dark: '#001219',
+                positive: '#0a9396',
+                negative: '#ae2012',
+                neutral: '#ee9b00'
+            };
+
+            const defaultTooltipCallbacks = {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            };
+
+            function wrapLabel(label, maxWidth = 16) {
+                if (label.length <= maxWidth) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine += (currentLine ? ' ' : '') + word;
+                    }
+                });
+                lines.push(currentLine);
+                return lines;
+            }
+
+            if (document.getElementById('gdpComponentsChart')) {
+                new Chart(document.getElementById('gdpComponentsChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Consumo (C)', 'Inversión (I)', 'Gasto Público (G)', 'Exportaciones Netas (X-M)'],
+                        datasets: [{
+                            label: 'Componente del PIB',
+                            data: [65, 18, 15, 2],
+                            backgroundColor: [palette.primary, palette.accent, palette.light, palette.highlight],
+                            borderColor: '#fff',
+                            borderWidth: 3,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: defaultTooltipCallbacks
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('sectorPerformanceChart')) {
+                const sectorLabels = [
+                    'Servicios de apoyo a negocios', 
+                    'Servicios profesionales', 
+                    'Manufacturas',
+                    'Construcción',
+                    'Comercio al por mayor',
+                    'Minería'
+                ];
+
+                new Chart(document.getElementById('sectorPerformanceChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: sectorLabels.map(label => wrapLabel(label)),
+                        datasets: [{
+                            label: 'Crecimiento Anual (%)',
+                            data: [15, 10.9, 1.1, 0, -5.1, -8.2],
+                            backgroundColor: [
+                                palette.positive, 
+                                palette.positive, 
+                                palette.light,
+                                palette.neutral,
+                                palette.negative,
+                                palette.negative
+                            ],
+                            borderColor: [
+                                palette.positive, 
+                                palette.positive, 
+                                palette.light,
+                                palette.neutral,
+                                palette.negative,
+                                palette.negative
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: defaultTooltipCallbacks
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Tasa de Crecimiento Anual (%)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('gdpProjectionChart')) {
+                new Chart(document.getElementById('gdpProjectionChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                        datasets: [{
+                            label: 'Crecimiento del PIB Real (%)',
+                            data: [1.45, -0.26, 1.37, 2.14, 2.20, 2.18, 2.10],
+                            backgroundColor: palette.accent,
+                            borderColor: palette.primary,
+                            borderWidth: 1,
+                            borderRadius: 4,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                         plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: defaultTooltipCallbacks
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Proyección de Crecimiento (%)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
